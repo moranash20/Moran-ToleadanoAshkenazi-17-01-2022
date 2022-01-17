@@ -1,0 +1,18 @@
+.home {
+  &__searchInput {
+    text-align: center;
+    border: 2px;
+    border-radius: 20px;
+    display: flex;
+    border-style: solid;
+  }
+  &__input {
+    overflow: visible;
+    background: none;
+    text-align: center;
+    border: none;
+  }
+  .bi-search {
+    left: 8px;
+  }
+}

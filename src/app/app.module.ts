@@ -3,16 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { FavoritesComponent } from './favorites/favorites.component';
+import { HttpClientModule } from '@angular/common/http';
+import { WeatherService } from './services/weather.service';
+import { MaterialModule } from './material/material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  declarations: [AppComponent, HomeComponent, FavoritesComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, MaterialModule, BrowserAnimationsModule],
+  providers: [WeatherService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
