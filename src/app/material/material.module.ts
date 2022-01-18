@@ -4,8 +4,21 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatRadioModule } from '@angular/material/radio';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 
-const modules: any = [MatInputModule, BrowserModule, BrowserAnimationsModule];
+const modules: any = [
+  MatInputModule,
+  BrowserModule,
+  BrowserAnimationsModule,
+  MatRadioModule,
+];
 
 @NgModule({
   declarations: [],

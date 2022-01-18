@@ -1,4 +1,8 @@
 .home {
+  position: relative;
+  &__title {
+    margin-top: 10px;
+  }
   &__searchInput {
     text-align: center;
     border: 2px;
@@ -11,6 +15,14 @@
     background: none;
     text-align: center;
     border: none;
+    border-radius: 20px;
+    width: 100%;
+
+    .mat-radio-button {
+      //margin-bottom: 15px;
+      //margin-left: 16px;
+      display: flex;
+    }
   }
   .bi-search {
     left: 8px;

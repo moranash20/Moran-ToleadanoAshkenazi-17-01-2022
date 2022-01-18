@@ -20,15 +20,8 @@ export class WeatherService {
 
   constructor(private httpService: HttpClient) {}
 
-  // public getWeather(location: string) {
-  //   return this.httpService.get(
-  //     // 'https://api.apixu.com/v1/' + location
-  //     'https://api.apixu.com/v1/current.json?key=YOUR_API_KEY&q=' + location
-  //   );
-  // }
-
-  public getRequest(url: string, q?: string) {
-    const params = new HttpParams({ fromObject: { apikey: this.API_KEY } });
+  public getRequest(url: string, q?: any) {
+    const params = new HttpParams({ fromObject: { apikey: this.API_KEY, q } });
     return this.httpService.get(url, { params });
   }
 

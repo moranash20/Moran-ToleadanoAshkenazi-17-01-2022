@@ -9,10 +9,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { WeatherService } from './services/weather.service';
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, FavoritesComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, MaterialModule, BrowserAnimationsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    MaterialModule,
+    BrowserAnimationsModule,
+  ],
   providers: [WeatherService],
   bootstrap: [AppComponent],
 })
