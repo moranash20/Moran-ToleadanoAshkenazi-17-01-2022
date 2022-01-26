@@ -25,6 +25,7 @@
     "angular-in-memory-web-api": "^0.13.0",
     "angular-video-background": "^1.0.3",
     "bootstrap": "^4.5.0",
+    "json-server": "^0.17.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -42,5 +43,6 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~4.3.5"
-  }
+  },
+  "api": "json-server CurrentConditions.json --routes api/routes.json --no-cors=true"
 }

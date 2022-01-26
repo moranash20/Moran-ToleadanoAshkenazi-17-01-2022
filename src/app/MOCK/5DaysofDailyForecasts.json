@@ -1,0 +1,168 @@
+{
+  "Headline": {
+    "EffectiveDate": "2022-01-20T07:00:00+01:00",
+    "EffectiveEpochDate": 1642658400,
+    "Severity": 3,
+    "Text": "Mixed rain and snow Thursday; roads could be slippery",
+    "Category": "snow/rain",
+    "EndDate": "2022-01-20T19:00:00+01:00",
+    "EndEpochDate": 1642701600,
+    "MobileLink": "http://www.accuweather.com/en/ch/meisterschwanden/1/daily-weather-forecast/1?lang=en-us",
+    "Link": "http://www.accuweather.com/en/ch/meisterschwanden/1/daily-weather-forecast/1?lang=en-us"
+  },
+  "DailyForecasts": [
+    {
+      "Date": "2022-01-20T07:00:00+01:00",
+      "EpochDate": 1642658400,
+      "Temperature": {
+        "Minimum": {
+          "Value": 22,
+          "Unit": "F",
+          "UnitType": 18
+        },
+        "Maximum": {
+          "Value": 40,
+          "Unit": "F",
+          "UnitType": 18
+        }
+      },
+      "Day": {
+        "Icon": 29,
+        "IconPhrase": "Rain and snow",
+        "HasPrecipitation": true,
+        "PrecipitationType": "Mixed",
+        "PrecipitationIntensity": "Light"
+      },
+      "Night": {
+        "Icon": 19,
+        "IconPhrase": "Flurries",
+        "HasPrecipitation": true,
+        "PrecipitationType": "Snow",
+        "PrecipitationIntensity": "Light"
+      },
+      "Sources": ["AccuWeather"],
+      "MobileLink": "http://www.accuweather.com/en/ch/meisterschwanden/1/daily-weather-forecast/1?day=1&lang=en-us",
+      "Link": "http://www.accuweather.com/en/ch/meisterschwanden/1/daily-weather-forecast/1?day=1&lang=en-us"
+    },
+    {
+      "Date": "2022-01-21T07:00:00+01:00",
+      "EpochDate": 1642744800,
+      "Temperature": {
+        "Minimum": {
+          "Value": 19,
+          "Unit": "F",
+          "UnitType": 18
+        },
+        "Maximum": {
+          "Value": 34,
+          "Unit": "F",
+          "UnitType": 18
+        }
+      },
+      "Day": {
+        "Icon": 29,
+        "IconPhrase": "Rain and snow",
+        "HasPrecipitation": true,
+        "PrecipitationType": "Mixed",
+        "PrecipitationIntensity": "Light"
+      },
+      "Night": {
+        "Icon": 19,
+        "IconPhrase": "Flurries",
+        "HasPrecipitation": true,
+        "PrecipitationType": "Snow",
+        "PrecipitationIntensity": "Light"
+      },
+      "Sources": ["AccuWeather"],
+      "MobileLink": "http://www.accuweather.com/en/ch/meisterschwanden/1/daily-weather-forecast/1?day=2&lang=en-us",
+      "Link": "http://www.accuweather.com/en/ch/meisterschwanden/1/daily-weather-forecast/1?day=2&lang=en-us"
+    },
+    {
+      "Date": "2022-01-22T07:00:00+01:00",
+      "EpochDate": 1642831200,
+      "Temperature": {
+        "Minimum": {
+          "Value": 26,
+          "Unit": "F",
+          "UnitType": 18
+        },
+        "Maximum": {
+          "Value": 37,
+          "Unit": "F",
+          "UnitType": 18
+        }
+      },
+      "Day": {
+        "Icon": 8,
+        "IconPhrase": "Dreary",
+        "HasPrecipitation": false
+      },
+      "Night": {
+        "Icon": 38,
+        "IconPhrase": "Mostly cloudy",
+        "HasPrecipitation": false
+      },
+      "Sources": ["AccuWeather"],
+      "MobileLink": "http://www.accuweather.com/en/ch/meisterschwanden/1/daily-weather-forecast/1?day=3&lang=en-us",
+      "Link": "http://www.accuweather.com/en/ch/meisterschwanden/1/daily-weather-forecast/1?day=3&lang=en-us"
+    },
+    {
+      "Date": "2022-01-23T07:00:00+01:00",
+      "EpochDate": 1642917600,
+      "Temperature": {
+        "Minimum": {
+          "Value": 31,
+          "Unit": "F",
+          "UnitType": 18
+        },
+        "Maximum": {
+          "Value": 38,
+          "Unit": "F",
+          "UnitType": 18
+        }
+      },
+      "Day": {
+        "Icon": 8,
+        "IconPhrase": "Dreary",
+        "HasPrecipitation": false
+      },
+      "Night": {
+        "Icon": 38,
+        "IconPhrase": "Mostly cloudy",
+        "HasPrecipitation": false
+      },
+      "Sources": ["AccuWeather"],
+      "MobileLink": "http://www.accuweather.com/en/ch/meisterschwanden/1/daily-weather-forecast/1?day=4&lang=en-us",
+      "Link": "http://www.accuweather.com/en/ch/meisterschwanden/1/daily-weather-forecast/1?day=4&lang=en-us"
+    },
+    {
+      "Date": "2022-01-24T07:00:00+01:00",
+      "EpochDate": 1643004000,
+      "Temperature": {
+        "Minimum": {
+          "Value": 26,
+          "Unit": "F",
+          "UnitType": 18
+        },
+        "Maximum": {
+          "Value": 36,
+          "Unit": "F",
+          "UnitType": 18
+        }
+      },
+      "Day": {
+        "Icon": 8,
+        "IconPhrase": "Dreary",
+        "HasPrecipitation": false
+      },
+      "Night": {
+        "Icon": 38,
+        "IconPhrase": "Mostly cloudy",
+        "HasPrecipitation": false
+      },
+      "Sources": ["AccuWeather"],
+      "MobileLink": "http://www.accuweather.com/en/ch/meisterschwanden/1/daily-weather-forecast/1?day=5&lang=en-us",
+      "Link": "http://www.accuweather.com/en/ch/meisterschwanden/1/daily-weather-forecast/1?day=5&lang=en-us"
+    }
+  ]
+}

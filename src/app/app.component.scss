@@ -1,15 +1,17 @@
 .app {
-  //   width: 100%;
-  //   height: 100%;
-  overflow: hidden;
-  position: relative;
-  //   //background: url("./../assets/images/BrownIllegalChafer-mobile.mp4");
-  //   background-size: cover;
-  //   background-position: center;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  text-align: center;
+  &__home {
+    //   width: 100%;
+    //   height: 100%;
+    overflow: hidden;
+    position: relative;
+    //background: url("./../assets/images/BrownIllegalChafer-mobile.mp4");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+  }
 
   &__keys {
     display: flex;

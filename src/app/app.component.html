@@ -1,4 +1,4 @@
-<div class="app">
+<!-- <div class="app">
   <main>
     <video autoplay muted loop id="myVideo">
       <source
@@ -6,6 +6,19 @@
         type="video/mp4"
       />
     </video>
+    <router-outlet></router-outlet>
+  </main>
+</div> -->
+
+<div class="app">
+  <video autoplay muted loop id="myVideo">
+    <source
+      src="./../assets/images/BrownIllegalChafer-mobile.mp4"
+      type="video/mp4"
+    />
+  </video>
+  <!-- <app-home class="app__home"> </app-home> -->
+  <main>
     <router-outlet></router-outlet>
   </main>
 </div>

@@ -1,11 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
-import { Geolocation } from '../modals/geolocation.interface';
-import { state } from '@angular/animations';
-import { Subject } from 'rxjs';
-import { debounceTime, filter, switchMap, takeUntil } from 'rxjs/operators';
-// import { FormControl, FormGroup } from '@angular/forms';
-import { currCon } from '../MOCK/CurrentConditions.module';
+import { Geolocation } from '../models/geolocation.interface';
+import { keyframes, state } from '@angular/animations';
+import { Observable, Subject } from 'rxjs';
+import {
+  debounceTime,
+  filter,
+  map,
+  switchMap,
+  takeUntil,
+  tap,
+} from 'rxjs/operators';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { WeatherApiResp } from '../models/wheatherApiResp';
+import { Time } from '@angular/common';
+import { IFavorites } from '../models/favorite.interface';
+import { FavoritesService } from '../services/favorites.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,47 +26,89 @@ import { currCon } from '../MOCK/CurrentConditions.module';
 export class HomeComponent implements OnInit {
   public DEFAULT_LAT: number = 32.109333;
   public DEFAULT_LNG: number = 34.855499;
-  public cityName: string = '';
-  public headLine: string = '';
-  public forecasts: string = '';
+  public cityName!: string;
+  public cityKey!: string;
+  public startChar!: string;
+  public currentCelsiusDeg!: number;
+  public currentFahrenheitDeg!: number;
   public celsiusFahrenheit: boolean = true;
   public weatherData: any;
   public autoCompleteInput: Subject<string> = new Subject<string>();
   public ngUnSubscribe: Subject<void> = new Subject<void>();
+  public isFavorite: boolean = false;
+  public currentTime = new Date();
+  public currentWeatherStaus: string | undefined;
+  public favoritesList: IFavorites[] = [];
+
+  public weatherSearchForm!: FormGroup;
+
+  public weather$?: Observable<WeatherApiResp>;
+
+  public autoCompletedSuggestions: string = '';
 
   constructor(
-    private WeatherService: WeatherService // public weatherSearchForm: FormGroup
+    private WeatherService: WeatherService,
+    private favoritesService: FavoritesService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.WeatherService.getCurrentConditions(this.cityName).subscribe(
-      (data) => {
-        this.cityName = data;
-        console.log('city', this.cityName);
-      }
-    );
-    // this.autoCompleteInput.pipe(
-    //   filter((data: string) => data.length > 0),
-    //   takeUntil(this.ngUnSubscribe),
-    //   debounceTime(300),
-    //   switchMap((data: string) => {
-    //     return this.WeatherService.getAutoComplete(data);
-    //   })
-    // );
-    // .subscribe((suggestions: AutoCompleteSuggestions[]) => {
-    //   this.autoCompletedSuggestions = suggestions;
-    // });
+    // this.activatedRoute.params.pipe(
+    //   map(params => params.key),
+    // )
+
+    this.autoCompleteInput
+      .pipe(
+        filter((data: string) => data.length > 0),
+
+        takeUntil(this.ngUnSubscribe),
+        debounceTime(300),
+        switchMap((data: string) => {
+          console.log('getAutoComplete', data);
+          return this.WeatherService.getAutoComplete(data);
+        })
+      )
+      .subscribe((dataSuggestions) => {
+        this.autoCompletedSuggestions = dataSuggestions;
+      });
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         const { latitude, longitude } = position.coords;
-        console.log('latitude', latitude);
-        console.log('longitude', longitude);
-        this.WeatherService.getGeoPosition(latitude, longitude).subscribe(
-          (data) => {
-            console.log('data', data);
-            //this.handleInitPosition(data);
-          }
+        console.log('latitude', position.coords.latitude);
+        console.log('longitude', position.coords.longitude);
+        this.weather$ = this.WeatherService.getGeoPosition(
+          latitude,
+          longitude
+        ).pipe(
+          tap(console.log),
+          switchMap((data) => {
+            this.cityName = data.LocalizedName;
+            this.cityKey = data.Key;
+            console.log('cityKey', this.cityKey);
+
+            return this.WeatherService.getCurrentConditions(data.Key).pipe(
+              filter((data) => !!data),
+              tap((data) => {
+                this.currentTime = data[0].LocalObservationDateTime;
+                this.currentCelsiusDeg = data[0].Temperature.Metric.Value;
+                this.currentFahrenheitDeg = data[0].Temperature.Imperial.Value;
+                this.currentWeatherStaus = data[0].WeatherText;
+                this.favoritesService.favoriteSubject$.pipe(
+                  filter(data),
+                  map((data) => {
+                    console.log('map', data);
+                    this.addToFavoritesList(data);
+                  })
+                );
+                this.favoritesService.favoriteSubject$.subscribe((data) => {
+                  console.log('subscribe', data);
+
+                  this.addToFavoritesList(data);
+                });
+              })
+            );
+          })
         );
       });
     } else {
@@ -63,32 +116,55 @@ export class HomeComponent implements OnInit {
         this.DEFAULT_LAT,
         this.DEFAULT_LNG
       ).subscribe((data) => {
+        this.cityName = data.LocalizedName;
         console.log('data', data);
-        //this.handleInitPosition(data);
       });
     }
   }
 
-  public getCurrentWeather(formValues: any) {
-    this.WeatherService.getCurrentConditions(formValues.location).subscribe(
-      (data) => {
-        this.weatherData = data;
-        console.log('weatherData', this.weatherData);
-      }
-    );
-  }
-
-  // private handleInitPosition(geoPositionRes: GeoPositionRes) {
-  //   this.cityName = `${geoPositionRes.ParentCity.EnglishName},${geoPositionRes.Country.EnglishName}`;
-  //   this.WeatherService
-  //     .get5DaysOfForecasts(geoPositionRes.Key)
-  //     .subscribe((fiveDaysForecastData: FiveDaysForecast) => {
-  //       this.headLine = fiveDaysForecastData.Headline.Text;
-  //       this.forecasts = fiveDaysForecastData.DailyForecasts;
-  //     });
-  // }
-
   public toggleCelsiusFahrenheitv(): boolean {
     return (this.celsiusFahrenheit = !this.celsiusFahrenheit);
   }
+
+  public getCurrenLocationDetail(): any {
+    return this.WeatherService.getCurrentConditions(this.weatherData);
+  }
+
+  public clickFavoritesButton(cityName: string): boolean {
+    let cityIndex: number = 0;
+    // console.log(this.isFavorite);
+    if (!this.isFavorite) cityIndex = this.addToFavoritesList(cityName);
+    else this.removeFavorite(cityIndex);
+    return this.isFavorite;
+  }
+
+  public addToFavoritesList(data: any): number {
+    console.log('addToFavoritesList');
+    // this.favoritesService.favoriteSubject$.subscribe((data) => {
+    //   console.log('favoritesList', data);
+
+    // });
+    // this.isFavorite = true;
+
+    // this.favoritesList.push(cityName);
+    // console.log('favoritesList', this.favoritesList);
+    // console.log('city index', this.favoritesList.findIndex(cityName));
+    console.log(data);
+    this.favoritesList.push(data);
+    this.favoritesService.setFavorites(this.favoritesList);
+    this.isFavorite = true;
+    return this.favoritesList.length;
+  }
+
+  public removeFavorite(favoriteIndex: any): void {
+    console.log('removeFavorite');
+    if (this.isFavorite) {
+      this.isFavorite = false;
+      this.favoritesList.splice(favoriteIndex, 1);
+    }
+  }
+
+  // public deleteFavorite(favoriteIndex: number): void {
+  //   this.favoritesList.splice(favoriteIndex, 1);
+  // }
 }

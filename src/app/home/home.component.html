@@ -1,5 +1,27 @@
 <div class="home">
-  <div class="home__title"><h1>The Weather Channel</h1></div>
+  <div class="home__title">
+    <h1 class="home__title-text">The Weather Channel</h1>
+    <ul class="home__links">
+      <li class="home__favorites-link">
+        <a [routerLink]="['/']" routerLinkActive="home__favorites-link--active"
+          >Home</a
+        >
+        <a
+          [routerLink]="['/favorites']"
+          routerLinkActive="home__favorites-link--active"
+          >Favorites</a
+        >
+      </li>
+    </ul>
+    <!-- <app-favorites
+      *ngFor="let favorite of favoritesList; let i = index"
+      [favorite]="favorite"
+      [favoriteIndex]="i"
+      (onRemove)="removeFavorite($event)"
+      [favoritesList]="favoritesList"
+    >
+    </app-favorites> -->
+  </div>
   <div class="home__header">
     <div class="home__searchInput">
       <svg
@@ -27,16 +49,37 @@
     </mat-radio-group>
   </div>
   <p></p>
-  <div class="home__selected">city weather</div>
-  <div class="row">
+
+  <div class="home__row" *ngIf="weather$ | async as weather">
     <div class="col-md-6">
-      <h3 class="text-center my-4">Weather Details:</h3>
-      <p class="text-center">Current weather conditions:</p>
-      <p class="text-center">Temperature in Degrees Celsius:</p>
-      <p class="text-center">Temperature in Degrees Farenheit:</p>
-      <p class="text-center">Feels like in Degrees Celsius:</p>
-      <p class="text-center">Feels like in Degrees Farenheit:</p>
-      <p class="text-center">Location Searched:</p>
+      <h3 class="home__row-detail">
+        <b>{{ cityName }}</b>
+        <p type="date" data-date="" data-date-format="DD MMMM YYYY">
+          {{ currentTime }}
+        </p>
+      </h3>
+      <p class="home__row-detail">
+        Current weather conditions:
+        {{ weather.PrecipitationType }}
+      </p>
+      <p class="home__row-detail">
+        Temperature in Degrees Celsius: {{ currentCelsiusDeg }}
+      </p>
+      <p class="home__row-detail">
+        Temperature in Degrees Farenheit:
+        {{ currentFahrenheitDeg }}
+      </p>
+      <p class="home__row-detail">
+        {{ currentWeatherStaus }}
+      </p>
     </div>
   </div>
+  <div class="fav" *ngIf="isFavorite; else favorite_border">
+    <mat-icon (click)="clickFavoritesButton(cityName)">favorite</mat-icon>
+  </div>
+  <ng-template #favorite_border
+    ><mat-icon (click)="clickFavoritesButton(cityName)"
+      >favorite_border</mat-icon
+    ></ng-template
+  >
 </div>

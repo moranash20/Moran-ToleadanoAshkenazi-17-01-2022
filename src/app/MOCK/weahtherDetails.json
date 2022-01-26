@@ -1,0 +1,25 @@
+[
+  {
+    "EpochTime": 14,
+    "HasPrecipitation": true,
+    "IsDayTime": true,
+    "Link": "Link",
+    "LocalObservationDateTime": "Israel",
+    "MobileLink": "MobileLink",
+    "PrecipitationType": "PrecipitationType",
+    "Temperature": {
+      "Metric": {
+        "Unit": "C",
+        "UnitType": 13,
+        "Value": 2
+      },
+      "Imperial": {
+        "Unit": "F",
+        "UnitType": 137,
+        "Value": 6
+      }
+    },
+    "WeatherIcon": 16,
+    "WeatherText": "Rain"
+  }
+]
