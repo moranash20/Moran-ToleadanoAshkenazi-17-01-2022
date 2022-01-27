@@ -6,10 +6,10 @@
   &__title {
     margin-top: 10px;
   }
-  &__title-text {
-    color: darkblue;
-    font-size: xx-large;
-  }
+  //   &__title-text {
+  //     color: darkblue;
+  //     font-size: xx-large;
+  //   }
   &__searchInput {
     text-align: center;
     border: 2px;
@@ -61,14 +61,14 @@
     cursor: pointer;
   }
 
-  &__favorites-link {
-    display: flex;
-    margin-left: 100px;
-    margin-top: -50px;
-    &--active {
-      color: red;
-      font-weight: 300;
-      padding: 0 10px;
-    }
-  }
+  //   &__favorites-link {
+  //     display: flex;
+  //     margin-left: 100px;
+  //     margin-top: -50px;
+  //     &--active {
+  //       color: red;
+  //       font-weight: 300;
+  //       padding: 0 10px;
+  //     }
+  //   }
 }

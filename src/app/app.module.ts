@@ -10,9 +10,10 @@ import { WeatherService } from './services/weather.service';
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, FavoritesComponent],
+  declarations: [AppComponent, HomeComponent, FavoritesComponent, HeaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

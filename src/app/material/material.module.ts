@@ -6,6 +6,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCardModule } from '@angular/material/card';
 
 import {
   trigger,
@@ -21,6 +23,8 @@ const modules: any = [
   BrowserAnimationsModule,
   MatRadioModule,
   MatIconModule,
+  MatAutocompleteModule,
+  MatCardModule,
 ];
 
 @NgModule({

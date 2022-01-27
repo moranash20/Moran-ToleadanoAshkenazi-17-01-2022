@@ -1,0 +1,23 @@
+<div class="header">
+  <mat-card class="header__card">
+    <mat-card-title class="header__title">Weather Channel</mat-card-title>
+    <mat-card-actions align="end">
+      <button
+        mat-button
+        class="header__button"
+        [routerLink]="['/']"
+        routerLinkActive="home__favorites-link--active"
+      >
+        Home
+      </button>
+      <button
+        mat-button
+        class="header__button"
+        [routerLink]="['/favorites']"
+        routerLinkActive="home__favorites-link--active"
+      >
+        Favorites
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

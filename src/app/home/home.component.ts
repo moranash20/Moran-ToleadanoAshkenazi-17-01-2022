@@ -11,12 +11,13 @@ import {
   takeUntil,
   tap,
 } from 'rxjs/operators';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { WeatherApiResp } from '../models/wheatherApiResp';
 import { Time } from '@angular/common';
 import { IFavorites } from '../models/favorite.interface';
 import { FavoritesService } from '../services/favorites.service';
 import { ActivatedRoute } from '@angular/router';
+import { AW_LocationData } from '../models/locationData.interface';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +30,7 @@ export class HomeComponent implements OnInit {
   public cityName!: string;
   public cityKey!: string;
   public startChar!: string;
+  searchForm = new FormControl();
   public currentCelsiusDeg!: number;
   public currentFahrenheitDeg!: number;
   public celsiusFahrenheit: boolean = true;
@@ -45,6 +47,19 @@ export class HomeComponent implements OnInit {
   public weather$?: Observable<WeatherApiResp>;
 
   public autoCompletedSuggestions: string = '';
+
+  private results?: AW_LocationData[];
+
+  @Output() placeSelected = new EventEmitter<string>();
+
+  filteredOptions$: Observable<string[]> = this.searchForm.valueChanges.pipe(
+    debounceTime(1000),
+    switchMap((value) => this.WeatherService.getAutoComplete(value)),
+    map((values) => {
+      this.results = values;
+      return values.map((v: { LocalizedName: any }) => v.LocalizedName);
+    })
+  );
 
   constructor(
     private WeatherService: WeatherService,
@@ -119,6 +134,13 @@ export class HomeComponent implements OnInit {
         this.cityName = data.LocalizedName;
         console.log('data', data);
       });
+    }
+  }
+
+  selectPlace(name: string) {
+    const place = this.results?.find((place) => place.LocalizedName === name);
+    if (place) {
+      this.placeSelected.emit(place.Key);
     }
   }
 
